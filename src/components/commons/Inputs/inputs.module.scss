@@ -1,0 +1,200 @@
+.card {
+  border: 2px solid var(--color-border);
+  border-radius: 0.5rem;
+  background-color: var(--color-white);
+  overflow: hidden;
+
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+.input {
+  padding: 15px;
+  width: 300px;
+}
+
+.textarea {
+  appearance: none;
+  resize: none;
+
+  padding: 10px;
+
+  overflow: hidden;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &Icon {
+    width: 30px;
+    aspect-ratio: 1;
+  }
+
+  &Input {
+    padding-block: 15px;
+  }
+}
+
+.dropdown {
+  position: relative;
+
+  &List {
+    position: absolute;
+    transform: translateY(10px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    box-shadow: 4px 0px 56px -10px rgba(34, 60, 80, 0.2);
+    border-radius: 0.5em;
+    background-color: var(--color-white);
+    overflow: hidden;
+  }
+
+  &Item {
+    width: 100%;
+    padding: 10px;
+
+    background-color: var(--color-white);
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-white);
+  // box-shadow: 4px 0px 40px 0px rgba(34, 60, 80, 0.2);
+
+  border-radius: 0.5em;
+  padding: 30px 30px;
+  width: 100%;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.radio {
+  appearance: none;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5em;
+  height: 1.5em;
+  width: 1.5em;
+
+  background-color: var(--color-white);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+
+    background-color: var(--color-white);
+  }
+
+  &:checked::before {
+    border: 0.5em solid var(--color-primary);
+  }
+}
+
+.checkbox {
+  appearance: none;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 1.5em;
+  width: 1.5em;
+
+  border: 1px solid var(--color-border);
+  border-radius: 0.5em;
+
+  background-color: var(--color-white);
+  cursor: pointer;
+
+  &::before {
+    border-radius: 5px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+
+    left: 40%;
+    top: 25%;
+    width: 5px;
+    height: 10px;
+    border: solid var(--color-white);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+
+  &:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+.toggle {
+  padding: 20px 10px;
+
+  cursor: pointer;
+
+  &Input {
+    cursor: pointer;
+    height: 1.5em;
+    width: 1.5em;
+
+    &Radio::before {
+      border-radius: 50%;
+    }
+
+    &Radio:checked::before {
+      border: 0.5em solid var(--color-secondary);
+    }
+
+    &Checkbox::before {
+      border-radius: 5px;
+    }
+
+    &Checkbox::after {
+      content: "";
+      position: absolute;
+
+      left: 40%;
+      top: 25%;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+
+    &Checkbox:checked::before {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+  }
+}

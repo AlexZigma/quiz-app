@@ -1,0 +1,48 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+
+  &Inner {
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background-color: var(--color-white);
+  }
+
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+    padding-inline: 40px;
+  }
+
+  &Footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: center;
+    margin-top: 40px;
+
+    & * {
+      flex: 1;
+    }
+  }
+
+  &Close {
+    display: flex;
+    justify-content: end;
+  }
+}

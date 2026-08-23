@@ -1,0 +1,35 @@
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5em;
+  color: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+
+  text-align: center;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:hover:not(:disabled) {
+    color: var(--color-link);
+    filter: brightness(0.95);
+  }
+
+  &:active:not(:disabled) {
+    color: var(--color-link);
+    filter: brightness(0.9);
+  }
+
+  &Primary {
+    background-color: var(--color-primary);
+  }
+
+  &Danger {
+    background-color: #ef2222;
+    color: white;
+  }
+}

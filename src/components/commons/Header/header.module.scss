@@ -1,0 +1,17 @@
+.header {
+  padding-block: 10px;
+  box-shadow: 4px 0px 56px -10px rgba(34, 60, 80, 0.2);
+  border-radius: 0 0 0.5em 0.5em;
+  background-color: var(--color-white);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &Actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+}

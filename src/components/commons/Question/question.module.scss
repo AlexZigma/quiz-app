@@ -1,0 +1,100 @@
+.question {
+  display: grid;
+  gap: 10px;
+
+  padding: 20px;
+
+  &Header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  &Title {
+    width: 100%;
+  }
+
+  &Main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &Answers {
+    display: grid;
+    gap: 10px;
+  }
+
+  &Actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  &Input {
+    width: 300px;
+  }
+}
+
+.sortableItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.answer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+
+  &Label {
+    cursor: pointer;
+  }
+
+  &Input {
+    flex: 1;
+    width: 100%;
+  }
+
+  &Delete {
+    width: 40px;
+    height: auto;
+  }
+
+  &Add {
+    align-self: flex-start;
+    padding: 10px;
+    border-radius: 10px;
+
+    background-color: var(--color-white);
+    color: var(--color-primary);
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &Answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &Footer {
+    display: flex;
+    gap: 20px;
+  }
+}
