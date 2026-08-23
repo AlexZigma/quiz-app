@@ -9,9 +9,19 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.2.5",
+    "@dnd-kit/abstract": "^0.5.0",
+    "@dnd-kit/dom": "^0.5.0",
+    "@dnd-kit/helpers": "^0.5.0",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/react": "^0.5.0",
+    "clsx": "^2.1.1",
+    "modifiers": "link:@dnd-kit/abstract/modifiers",
+    "next": "^16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-icons": "^5.6.0",
+    "use-debounce": "^10.1.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -21,5 +31,6 @@
     "eslint-config-next": "16.2.5",
     "sass": "^1.99.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }
