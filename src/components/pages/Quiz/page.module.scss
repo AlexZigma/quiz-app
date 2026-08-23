@@ -1,0 +1,20 @@
+.main {
+  display: grid;
+  align-content: start;
+  gap: 30px;
+}
+
+.form {
+  display: grid;
+  gap: 20px;
+
+  &Footer {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.list {
+  display: grid;
+  gap: 20px;
+}

@@ -1,0 +1,20 @@
+@use "@/styles/mixins" as *;
+
+.form {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 50px;
+  background-color: var(--color-white);
+
+  @include mobile {
+    padding: 0px;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 10px;
+}
