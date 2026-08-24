@@ -1,6 +1,6 @@
 "use client";
 
-import TestForm from "@/components/Tests/TestForm";
+import TestForm from "@/components/commons/Tests/TestForm";
 
 export default function TestPage() {
   return (

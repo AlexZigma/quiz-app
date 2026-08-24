@@ -3,10 +3,10 @@
 import { useAuth } from "@/providers/AuthProvider";
 import { redirect } from "next/navigation";
 import { MdEdit } from "react-icons/md";
-import ButtonLink from "../commons/Button/ButtonLink";
-import Card from "../commons/Card/Card";
-import { useModal } from "../commons/Modal/ModalContext";
-import { ModalConfirm } from "../commons/Modal/modals";
+import ButtonLink from "../Button/ButtonLink";
+import Card from "../Card/Card";
+import { useModal } from "../Modal/ModalContext";
+import { ModalConfirm } from "../Modal/modals";
 import styles from "./tests.module.scss";
 
 interface TestCardProps {
@@ -34,10 +34,7 @@ export default function TestCard({ id, title }: TestCardProps) {
       <div className={styles.cardActions}>
         <button onClick={handleTestClick} className={styles.cardStart} />
         {user?.userType === "admin" && (
-          <ButtonLink
-            className={styles.cardEdit}
-            href={`/tests/${id}/edit`}
-          >
+          <ButtonLink className={styles.cardEdit} href={`/tests/${id}/edit`}>
             <MdEdit />
             Edit
           </ButtonLink>

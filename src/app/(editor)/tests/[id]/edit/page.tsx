@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchTestById } from "@/app/api/utils";
-import TestForm from "@/components/Tests/TestForm";
+import TestForm from "@/components/commons/Tests/TestForm";
 import { useRequest } from "@/lib/hooks";
 import { Test } from "@/models/test/types";
 import { useTest } from "@/providers/TestProvider";

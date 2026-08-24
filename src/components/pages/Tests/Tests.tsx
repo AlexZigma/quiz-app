@@ -7,7 +7,7 @@ import ButtonLink from "@/components/commons/Button/ButtonLink";
 import { SortDateButton } from "@/components/commons/Button/buttons";
 import Search from "@/components/commons/Inputs/Search";
 import Pagination from "@/components/commons/Pagination/Pagination";
-import TestsList from "@/components/Tests/TestsList";
+import TestsList from "@/components/commons/Tests/TestsList";
 import { TestBase } from "@/models/test/types";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

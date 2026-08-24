@@ -14,13 +14,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import z from "zod";
-import Button from "../commons/Button/Button";
-import Dropdown from "../commons/Inputs/Dropdown";
-import TextInput from "../commons/Inputs/TextInput";
-import { useModal } from "../commons/Modal/ModalContext";
-import { ModalConfirm, ModalDelete } from "../commons/Modal/modals";
-import QuestionForm from "../commons/Question/QuestionForm";
-import QuestionView from "../commons/Question/QuestionView";
+import Button from "../Button/Button";
+import Dropdown from "../Inputs/Dropdown";
+import TextInput from "../Inputs/TextInput";
+import { useModal } from "../Modal/ModalContext";
+import { ModalConfirm, ModalDelete } from "../Modal/modals";
+import QuestionForm from "../Question/QuestionForm";
+import QuestionView from "../Question/QuestionView";
 import styles from "./tests.module.scss";
 
 interface TestFormProps {
