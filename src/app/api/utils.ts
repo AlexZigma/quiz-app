@@ -30,7 +30,6 @@ export const request = async <T>(
   }
 
   if (!res.ok) {
-    console.log(JSON.stringify(await res.json(), null, 2));
     throw new Error("An error occurred while fetching the data");
   }
 

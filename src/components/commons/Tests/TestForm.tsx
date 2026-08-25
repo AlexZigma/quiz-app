@@ -48,7 +48,6 @@ export default function TestForm({ mode }: TestFormProps) {
 
     try {
       if (mode === "new") {
-        console.log(questions);
         const data = await createTestRequest({ title });
         await createQuestions(data.id, questions);
       } else {

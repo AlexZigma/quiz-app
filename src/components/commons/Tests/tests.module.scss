@@ -37,7 +37,6 @@
 
   &Header {
     display: flex;
-    // flex-direction: column;
     justify-content: space-between;
     gap: 10px;
     width: 100%;
@@ -74,8 +73,6 @@
   background-color: var(--color-white);
   box-shadow: 4px 0px 56px -10px rgba(34, 60, 80, 0.2);
   border-radius: 0.5em;
-
-  // cursor: pointer;
 
   &Header {
     display: grid;
