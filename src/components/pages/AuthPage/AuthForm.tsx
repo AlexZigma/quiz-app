@@ -1,7 +1,9 @@
 "use client";
 
 import Button from "@/components/commons/Button/Button";
+import Card from "@/components/commons/Card/Card";
 import Input from "@/components/commons/Inputs/TextInput";
+import ErrorText from "@/components/commons/Text/Error";
 import { SignInSchema } from "@/lib/zod";
 import { useAuth } from "@/providers/AuthProvider";
 import { useRouter } from "next/navigation";
@@ -14,8 +16,6 @@ type ErrorType = { username?: string[]; password?: string[]; message?: string };
 export default function AuthForm() {
   const router = useRouter();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [formError, setFormError] = useState<ErrorType | null>(null);
   const { login, isLoading } = useAuth();
 
@@ -23,7 +23,10 @@ export default function AuthForm() {
     event.preventDefault();
     setFormError(null);
 
-    const parsed = SignInSchema.safeParse({ username, password });
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    const parsed = SignInSchema.safeParse(data);
 
     if (!parsed.success) {
       setFormError(z.flattenError(parsed.error).fieldErrors);
@@ -39,43 +42,37 @@ export default function AuthForm() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <p className="h1">LOGIN</p>
+    <form onSubmit={handleSubmit}>
+      <Card className={styles.form}>
+        <p className="h1">LOGIN</p>
 
-      <label className={styles.field}>
-        Username
-        <Input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        {formError?.username && (
-          <p className="error">{formError.username[0]}</p>
-        )}
-      </label>
+        <label className={styles.field}>
+          Username
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="username"
+          />
+          <ErrorText text={formError?.username?.[0]} />
+        </label>
 
-      <label className={styles.field}>
-        Password
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="******"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        {formError?.password && (
-          <p className="error">{formError.password[0]}</p>
-        )}
-      </label>
+        <label className={styles.field}>
+          Password
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="******"
+          />
+          <ErrorText text={formError?.password?.[0]} />
+        </label>
 
-      <Button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? "Loading..." : "Log in"}
-      </Button>
-      {formError?.message && <p className="error">{formError.message}</p>}
+        <Button variant="primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Log in"}
+        </Button>
+        <ErrorText text={formError?.message} />
+      </Card>
     </form>
   );
 }
