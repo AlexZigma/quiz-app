@@ -84,3 +84,28 @@ export function ModalAlert({ title, href }: ModalAlertProps) {
 
   return <Modal {...modalConfig} />;
 }
+
+interface ModalErrorProps {
+  title?: string;
+}
+
+export function ModalError({ title = "Network error" }: ModalErrorProps) {
+  const { closeModal } = useModal();
+
+  const modalConfig: ModalConfig = {
+    title: title,
+    footer: (
+      <>
+        <Button
+          onClick={() => {
+            closeModal();
+          }}
+        >
+          Ok
+        </Button>
+      </>
+    ),
+  };
+
+  return <Modal {...modalConfig} />;
+}
