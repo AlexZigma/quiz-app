@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect } from "react";
 
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T | null>,
@@ -43,19 +43,4 @@ export function useScrollLock() {
       document.body.style.overflow = "auto";
     };
   }, []);
-}
-
-export function useRequest<T>(request: () => Promise<T | null>) {
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    request()
-      .then((data) => setData(data))
-      .catch(() => setData(null))
-      .finally(() => setIsLoading(false));
-  }, [request]);
-
-  return { data, error, isLoading };
 }
