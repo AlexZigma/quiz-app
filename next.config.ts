@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `https://interns-test-fe.snp.agency/api/:path*/`,
+        destination: `${baseUrl}/api/:path*/`,
       },
     ];
   },
