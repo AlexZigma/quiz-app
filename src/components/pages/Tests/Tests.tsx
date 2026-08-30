@@ -3,17 +3,22 @@
 import { fetchTests } from "@/app/api/utils";
 import styles from "./tests.module.scss";
 
-import ButtonLink from "@/components/commons/Button/ButtonLink";
-import { SortDateButton } from "@/components/commons/Button/buttons";
+import {
+  AddTestButton,
+  SortDateButton,
+} from "@/components/commons/Button/buttons";
 import Search from "@/components/commons/Inputs/Search";
 import Pagination from "@/components/commons/Pagination/Pagination";
 import TestsList from "@/components/commons/Tests/TestsList";
 import { TestBase } from "@/models/test/types";
+import { useAuth } from "@/providers/AuthProvider";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
 
 export default function Tests() {
+  const { user } = useAuth();
+  const isAdmin = user?.userType === "admin";
+
   const [tests, setTests] = useState<TestBase[]>();
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState("");
@@ -41,12 +46,11 @@ export default function Tests() {
           <SortDateButton />
         </div>
 
-        <div className={styles.toolbarActions}>
-          <ButtonLink variant="primary" href="/tests/create">
-            <MdAdd />
-            add test
-          </ButtonLink>
-        </div>
+        {isAdmin && (
+          <div className={styles.toolbarActions}>
+            <AddTestButton />
+          </div>
+        )}
       </div>
 
       {error && error}

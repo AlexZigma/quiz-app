@@ -30,7 +30,7 @@ export function SortDateButton() {
 
 export function AddTestButton() {
   return (
-    <ButtonLink variant="primary" href="/create">
+    <ButtonLink variant="primary" href="/tests/create">
       <MdAdd />
       add test
     </ButtonLink>

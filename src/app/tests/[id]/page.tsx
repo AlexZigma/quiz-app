@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchTestById } from "@/app/api/utils";
+import ProtectedRoute from "@/app/ProtectedRoute";
 import Quiz from "@/components/pages/Quiz";
 import { Test } from "@/models/test/types";
 import { notFound } from "next/navigation";
@@ -27,5 +28,9 @@ export default function TestPage({
 
   if (!test) notFound();
 
-  return <Quiz test={test} />;
+  return (
+    <ProtectedRoute>
+      <Quiz test={test} />;
+    </ProtectedRoute>
+  );
 }
