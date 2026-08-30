@@ -21,7 +21,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export default function AuthProvider({ children }: {children: ReactNode}) {
+export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,6 +30,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
       try {
         const data = await fetchCurrentUser();
         setUser(data);
+      } catch {
       } finally {
         setIsLoading(false);
       }
