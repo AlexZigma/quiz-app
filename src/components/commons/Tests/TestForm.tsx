@@ -10,15 +10,20 @@ import {
 import Button from "@/components/commons/Button/Button";
 import Dropdown from "@/components/commons/Inputs/Dropdown";
 import TextInput from "@/components/commons/Inputs/TextInput";
-import { ModalConfirm, ModalDelete } from "@/components/commons/Modal/modals";
+import {
+  ModalConfirm,
+  ModalDelete,
+  ModalError,
+} from "@/components/commons/Modal/modals";
 import QuestionForm from "@/components/commons/Question/QuestionForm";
 import QuestionView from "@/components/commons/Question/QuestionView";
+import ErrorText from "@/components/commons/Text/Error";
 import { TestFormSchema } from "@/lib/zod";
 import { QuestionType } from "@/models/test/types";
 import { useModal } from "@/providers/ModalProvider";
 import { useTest } from "@/providers/TestProvider";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import z from "zod";
 import styles from "./tests.module.scss";
@@ -40,9 +45,16 @@ export default function TestForm({ mode }: TestFormProps) {
     questions?: string[];
   }>();
 
-  useEffect(() => {
-    if (mode === "new") return;
-  }, [mode]);
+  const handleSaveTest = () => {
+    const testParsed = TestFormSchema.safeParse(test);
+
+    if (!testParsed.success) {
+      setError(z.flattenError(testParsed.error).fieldErrors);
+      return;
+    }
+
+    openModal(<ModalConfirm title="Save test?" onConfirm={saveTest} />);
+  };
 
   const saveTest = async () => {
     const { id, title, questions } = test;
@@ -58,19 +70,7 @@ export default function TestForm({ mode }: TestFormProps) {
       }
       router.push("/tests");
     } catch {
-      alert("Cannot save test");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const deleteTest = async () => {
-    setIsLoading(true);
-
-    try {
-      await deleteTestRequest(test.id);
-      router.push("/tests");
-    } catch {
+      openModal(<ModalError />);
     } finally {
       setIsLoading(false);
     }
@@ -80,15 +80,17 @@ export default function TestForm({ mode }: TestFormProps) {
     openModal(<ModalDelete title="Delete test?" onConfirm={deleteTest} />);
   };
 
-  const handleSaveTest = () => {
-    const testParsed = TestFormSchema.safeParse(test);
+  const deleteTest = async () => {
+    setIsLoading(true);
 
-    if (!testParsed.success) {
-      setError(z.flattenError(testParsed.error).fieldErrors);
-      return;
+    try {
+      await deleteTestRequest(test.id);
+      router.push("/tests");
+    } catch {
+      openModal(<ModalError />);
+    } finally {
+      setIsLoading(false);
     }
-
-    openModal(<ModalConfirm title="Save test?" onConfirm={saveTest} />);
   };
 
   const renderQuestionsList = (
@@ -132,7 +134,7 @@ export default function TestForm({ mode }: TestFormProps) {
               });
             }}
           />
-          {error?.title && <p className="error">{error.title}</p>}
+          <ErrorText text={error?.title?.[0]} />
         </label>
       </div>
       {renderQuestionsList}
@@ -148,7 +150,7 @@ export default function TestForm({ mode }: TestFormProps) {
           }}
         />
       </div>
-      {error?.questions && <p className="error">{error.questions}</p>}
+      <ErrorText text={error?.questions?.[0]} />
     </div>
   );
 }
