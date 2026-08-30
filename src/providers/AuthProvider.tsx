@@ -5,25 +5,23 @@ import { User } from "@/models/user";
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
 type AuthContextType = {
   user: User | null;
   isLoading: boolean;
-  login: (username: string, password: string) => void;
-  logout: () => void;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export default function AuthProvider({ children }: AuthProviderProps) {
+export default function AuthProvider({ children }: {children: ReactNode}) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -40,35 +38,34 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     getCurrentUser();
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = useCallback(async (username: string, password: string) => {
     setIsLoading(true);
     try {
       const data = await loginRequest({ username, password });
       setUser(data);
-    } catch {
-      alert("network error");
     } finally {
       setIsLoading(false);
     }
-  };
+    return;
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     setIsLoading(true);
     try {
       await logoutRequest();
       setUser(null);
-    } catch {
-      alert("network error");
     } finally {
       setIsLoading(false);
     }
-  };
+    return;
+  }, []);
 
-  return (
-    <AuthContext value={{ user: user, isLoading, login, logout }}>
-      {children}
-    </AuthContext>
+  const value = useMemo(
+    () => ({ user, isLoading, login, logout }),
+    [user, isLoading, login, logout],
   );
+
+  return <AuthContext value={value}>{children}</AuthContext>;
 }
 
 export const useAuth = () => {

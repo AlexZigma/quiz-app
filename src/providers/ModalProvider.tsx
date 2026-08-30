@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 
-interface modalContextType {
+interface ModalContextType {
   openModal: (modal: ReactNode) => void;
   closeModal: () => void;
 }
@@ -20,7 +20,7 @@ export type ModalConfig = {
   footer?: ReactNode;
 };
 
-const modalContext = createContext<modalContextType | undefined>(undefined);
+const modalContext = createContext<ModalContextType | null>(null);
 
 export default function ModalProvider({ children }: { children: ReactNode }) {
   const [modal, setModal] = useState<ReactNode | null>(null);

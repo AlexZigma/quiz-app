@@ -54,9 +54,9 @@ export default function TestProvider({ children }: { children: ReactNode }) {
     setTest(initialTest);
   }, []);
 
-  const updateTest = (test: Partial<Test>) => {
+  const updateTest = useCallback((test: Partial<Test>) => {
     setTest((prev) => ({ ...prev, ...test }));
-  };
+  }, []);
 
   const updateQuestion = useCallback(
     (question: Question) => {
@@ -77,23 +77,26 @@ export default function TestProvider({ children }: { children: ReactNode }) {
     [test.questions],
   );
 
-  const deleteQuestionById = (id: string) => {
+  const deleteQuestionById = useCallback((id: string) => {
     setTest((prev) => ({
       ...prev,
       questions: prev.questions.filter((q) => q.id !== id),
     }));
-  };
+  }, []);
 
-  const getQuestionById = (id: string) => {
-    return test.questions.find((q) => q.id === id);
-  };
+  const getQuestionById = useCallback(
+    (id: string) => {
+      return test.questions.find((q) => q.id === id);
+    },
+    [test.questions],
+  );
 
-  const startDraft = (question: Question) => {
+  const startDraft = useCallback((question: Question) => {
     setDraft(question);
     setEditState({ mode: "edit", questionId: question.id });
-  };
+  }, []);
 
-  const startNewDraft = (questionType: QuestionType) => {
+  const startNewDraft = useCallback((questionType: QuestionType) => {
     const isRight = questionType === "number";
 
     setDraft({
@@ -104,13 +107,13 @@ export default function TestProvider({ children }: { children: ReactNode }) {
     });
 
     setEditState({ mode: "add" });
-  };
+  }, []);
 
-  const updateDraft = (question: Partial<Question>) => {
+  const updateDraft = useCallback((question: Partial<Question>) => {
     setDraft((prev) => (prev ? { ...prev, ...question } : null));
-  };
+  }, []);
 
-  const addDraftAnswer = () => {
+  const addDraftAnswer = useCallback(() => {
     setDraft((prev) => {
       if (!prev) return null;
 
@@ -123,9 +126,9 @@ export default function TestProvider({ children }: { children: ReactNode }) {
 
       return { ...prev, answers: [...prev.answers, newAnswer] };
     });
-  };
+  }, []);
 
-  const updateDraftAnswerText = (id: string, text: string) => {
+  const updateDraftAnswerText = useCallback((id: string, text: string) => {
     setDraft((prev) => {
       if (!prev) return null;
 
@@ -135,9 +138,9 @@ export default function TestProvider({ children }: { children: ReactNode }) {
 
       return { ...prev, answers: updatedAnswers };
     });
-  };
+  }, []);
 
-  const updateDraftRightSingle = (answerId: string) => {
+  const updateDraftRightSingle = useCallback((answerId: string) => {
     setDraft((prev) => {
       if (!prev) return null;
 
@@ -148,25 +151,28 @@ export default function TestProvider({ children }: { children: ReactNode }) {
 
       return { ...prev, answers: updatedAnswers };
     });
-  };
+  }, []);
 
-  const updateDraftRightMultiple = (answerId: string, isRight: boolean) => {
-    setDraft((prev) => {
-      if (!prev) return null;
+  const updateDraftRightMultiple = useCallback(
+    (answerId: string, isRight: boolean) => {
+      setDraft((prev) => {
+        if (!prev) return null;
 
-      const updatedAnswers = prev.answers.map((answer) =>
-        answer.id === answerId
-          ? { ...answer, isRight }
-          : {
-              ...answer,
-            },
-      );
+        const updatedAnswers = prev.answers.map((answer) =>
+          answer.id === answerId
+            ? { ...answer, isRight }
+            : {
+                ...answer,
+              },
+        );
 
-      return { ...prev, answers: updatedAnswers };
-    });
-  };
+        return { ...prev, answers: updatedAnswers };
+      });
+    },
+    [],
+  );
 
-  const deleteDraftAnswer = (id: string) => {
+  const deleteDraftAnswer = useCallback((id: string) => {
     setDraft((prev) => {
       if (!prev) return null;
       return {
@@ -174,12 +180,12 @@ export default function TestProvider({ children }: { children: ReactNode }) {
         answers: prev?.answers.filter((answer) => answer.id !== id),
       };
     });
-  };
+  }, []);
 
-  const resetDraft = () => {
+  const resetDraft = useCallback(() => {
     setDraft(null);
     setEditState({ mode: "view" });
-  };
+  }, []);
 
   return (
     <TestContext
