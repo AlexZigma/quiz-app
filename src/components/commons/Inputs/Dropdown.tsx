@@ -3,8 +3,8 @@
 import { useRef, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
+import Button from "@/components/commons/Button/Button";
 import { useClickOutside } from "@/lib/hooks";
-import Button from "../Button/Button";
 import styles from "./inputs.module.scss";
 
 interface DropdownProps {
