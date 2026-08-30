@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchTestById } from "@/app/api/utils";
-import Quiz from "@/components/pages/Quiz/Quiz";
+import Quiz from "@/components/pages/Quiz";
 import { Test } from "@/models/test/types";
 import { notFound } from "next/navigation";
 import { use, useLayoutEffect, useState } from "react";
@@ -19,7 +19,7 @@ export default function TestPage({
   useLayoutEffect(() => {
     fetchTestById(id)
       .then((data) => setTest(data))
-      .catch(() => alert("network error"))
+      .catch()
       .finally(() => setIsLoading(false));
   }, [id]);
 

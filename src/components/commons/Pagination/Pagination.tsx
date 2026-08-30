@@ -1,8 +1,8 @@
+import Button from "@/components/commons/Button/Button";
+import ButtonLink from "@/components/commons/Button/ButtonLink";
 import clsx from "clsx";
 import { usePathname, useSearchParams } from "next/navigation";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import Button from "../Button/Button";
-import ButtonLink from "../Button/ButtonLink";
 import styles from "./styles.module.scss";
 
 interface PaginationArrowProps {

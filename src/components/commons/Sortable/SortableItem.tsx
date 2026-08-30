@@ -9,7 +9,11 @@ interface SortableItemProps {
   index: number;
 }
 
-export function SortableItem({ children, id, index }: SortableItemProps) {
+export default function SortableItem({
+  children,
+  id,
+  index,
+}: SortableItemProps) {
   const refHandle = useRef<HTMLDivElement>(null);
 
   const { ref } = useSortable({

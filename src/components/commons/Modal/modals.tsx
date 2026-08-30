@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "../Button/Button";
-import ButtonLink from "../Button/ButtonLink";
+import Button from "@/components/commons/Button/Button";
+import ButtonLink from "@/components/commons/Button/ButtonLink";
+import { ModalConfig, useModal } from "@/providers/ModalProvider";
 import Modal from "./Modal";
-import { ModalConfig, useModal } from "./ModalContext";
 
 interface ModalConfirmProps {
   title: string;
@@ -26,9 +26,7 @@ export function ModalConfirm({ title, onConfirm }: ModalConfirmProps) {
         >
           Yes
         </Button>
-        <Button onClick={closeModal}>
-          Cancel
-        </Button>
+        <Button onClick={closeModal}>Cancel</Button>
       </>
     ),
   };
@@ -52,9 +50,7 @@ export function ModalDelete({ title, onConfirm }: ModalConfirmProps) {
         >
           Yes
         </Button>
-        <Button onClick={closeModal}>
-          Cancel
-        </Button>
+        <Button onClick={closeModal}>Cancel</Button>
       </>
     ),
   };

@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/commons/Button/Button";
-import Card from "@/components/commons/Card/Card";
+import Card from "@/components/commons/Card";
 import Input from "@/components/commons/Inputs/TextInput";
 import ErrorText from "@/components/commons/Text/Error";
 import { SignInSchema } from "@/lib/zod";

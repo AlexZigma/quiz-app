@@ -1,10 +1,10 @@
 "use client";
 
 import { useClickOutside, useEscPress, useScrollLock } from "@/lib/hooks";
+import { useModal } from "@/providers/ModalProvider";
 import { useRef } from "react";
 import { MdClose } from "react-icons/md";
 import styles from "./Modal.module.scss";
-import { useModal } from "./ModalContext";
 
 interface ModalProps {
   title?: string;

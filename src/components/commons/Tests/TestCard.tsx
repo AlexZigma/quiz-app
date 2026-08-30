@@ -1,12 +1,12 @@
 "use client";
 
+import ButtonLink from "@/components/commons/Button/ButtonLink";
+import Card from "@/components/commons/Card";
+import { ModalConfirm } from "@/components/commons/Modal/modals";
 import { useAuth } from "@/providers/AuthProvider";
+import { useModal } from "@/providers/ModalProvider";
 import { redirect } from "next/navigation";
 import { MdEdit } from "react-icons/md";
-import ButtonLink from "../Button/ButtonLink";
-import Card from "../Card/Card";
-import { useModal } from "../Modal/ModalContext";
-import { ModalConfirm } from "../Modal/modals";
 import styles from "./tests.module.scss";
 
 interface TestCardProps {

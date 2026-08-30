@@ -1,6 +1,6 @@
 import Header from "@/components/commons/Header/Header";
-import ModalProvider from "@/components/commons/Modal/ModalContext";
 import AuthProvider from "@/providers/AuthProvider";
+import ModalProvider from "@/providers/ModalProvider";
 import "@/styles/globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";

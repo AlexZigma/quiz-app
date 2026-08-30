@@ -1,5 +1,8 @@
+import TextInput from "@/components/commons/Inputs/TextInput";
+import Toggle from "@/components/commons/Inputs/Toggle";
 import { ChangeEvent } from "react";
-import TextInput from "../Inputs/TextInput";
+import { IoCloseOutline } from "react-icons/io5";
+import styles from "./question.module.scss";
 
 interface NumberAnswerProps {
   value: string;
@@ -19,10 +22,6 @@ export function NumberAnswer({ value, onChange }: NumberAnswerProps) {
     </label>
   );
 }
-
-import { IoCloseOutline } from "react-icons/io5";
-import Toggle from "../Inputs/Toggle";
-import styles from "./question.module.scss";
 
 interface ChoiceAnswerProps {
   type: "single" | "multiple";

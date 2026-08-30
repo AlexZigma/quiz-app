@@ -1,11 +1,11 @@
 "use client";
 
 import Button from "@/components/commons/Button/Button";
-import { useModal } from "@/components/commons/Modal/ModalContext";
 import { ModalAlert } from "@/components/commons/Modal/modals";
 import QuestionCard from "@/components/commons/Question/QuestionCard";
 import { isAnswerRight } from "@/lib/utils";
 import { Test } from "@/models/test/types";
+import { useModal } from "@/providers/ModalProvider";
 import { SubmitEventHandler } from "react";
 import styles from "./page.module.scss";
 

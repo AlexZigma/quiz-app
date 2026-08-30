@@ -1,8 +1,9 @@
 "use client";
 
-import Card from "../Card/Card";
-import Input from "../Inputs/TextInput";
-import Radio from "../Inputs/Toggle";
+import Card from "@/components/commons/Card";
+import TextInput from "@/components/commons/Inputs/TextInput";
+import Toggle from "@/components/commons/Inputs/Toggle";
+
 import styles from "./question.module.scss";
 
 interface QuestionCardProps {
@@ -28,12 +29,12 @@ export default function QuestionCard({
 
   const renderAnswers = answers.map((answer) => {
     if (questionType === "number") {
-      return <Input key={answer.id} name={questionId} />;
+      return <TextInput key={answer.id} type="number" name={questionId} />;
     }
 
     return (
       <div key={answer.id} className={styles.answer}>
-        <Radio
+        <Toggle
           id={answer.id}
           name={questionId}
           value={answer.id}

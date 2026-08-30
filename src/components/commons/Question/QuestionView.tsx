@@ -1,14 +1,14 @@
 "use client";
 
+import Button from "@/components/commons/Button/Button";
+import Card from "@/components/commons/Card";
+import TextInput from "@/components/commons/Inputs/TextInput";
+import Toggle from "@/components/commons/Inputs/Toggle";
+import { ModalDelete } from "@/components/commons/Modal/modals";
+import { useModal } from "@/providers/ModalProvider";
 import { useTest } from "@/providers/TestProvider";
 import { IoMdClose } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
-import Button from "../Button/Button";
-import Card from "../Card/Card";
-import TextInput from "../Inputs/TextInput";
-import Radio from "../Inputs/Toggle";
-import { useModal } from "../Modal/ModalContext";
-import { ModalDelete } from "../Modal/modals";
 import styles from "./question.module.scss";
 
 interface QuestionViewProps {
@@ -37,7 +37,7 @@ export default function QuestionView({ questionId }: QuestionViewProps) {
 
     return (
       <div key={answer.id} className={styles.answer}>
-        <Radio
+        <Toggle
           id={answer.id}
           name={questionId}
           value={answer.id}

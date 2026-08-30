@@ -7,21 +7,23 @@ import {
   updateQuestions,
   updateTestRequest,
 } from "@/app/api/utils";
+import Button from "@/components/commons/Button/Button";
+import Dropdown from "@/components/commons/Inputs/Dropdown";
+import TextInput from "@/components/commons/Inputs/TextInput";
+import { ModalConfirm, ModalDelete } from "@/components/commons/Modal/modals";
+import QuestionForm from "@/components/commons/Question/QuestionForm";
+import QuestionView from "@/components/commons/Question/QuestionView";
 import { TestFormSchema } from "@/lib/zod";
 import { QuestionType } from "@/models/test/types";
+import { useModal } from "@/providers/ModalProvider";
 import { useTest } from "@/providers/TestProvider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import z from "zod";
-import Button from "../Button/Button";
-import Dropdown from "../Inputs/Dropdown";
-import TextInput from "../Inputs/TextInput";
-import { useModal } from "../Modal/ModalContext";
-import { ModalConfirm, ModalDelete } from "../Modal/modals";
-import QuestionForm from "../Question/QuestionForm";
-import QuestionView from "../Question/QuestionView";
 import styles from "./tests.module.scss";
+
+const QUESTION_TYPE_OPTIONS = ["single", "multiple", "number"];
 
 interface TestFormProps {
   mode: "new" | "edit";
@@ -29,7 +31,7 @@ interface TestFormProps {
 
 export default function TestForm({ mode }: TestFormProps) {
   const { openModal } = useModal();
-  const { test, updateTest, editState, loadTest, startNewDraft } = useTest();
+  const { test, updateTest, editState, startNewDraft } = useTest();
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -140,7 +142,7 @@ export default function TestForm({ mode }: TestFormProps) {
       <div className={styles.formFooter}>
         <Dropdown
           label="Add question"
-          options={["single", "multiple", "number"]}
+          options={QUESTION_TYPE_OPTIONS}
           onChange={(option) => {
             startNewDraft(option as QuestionType);
           }}

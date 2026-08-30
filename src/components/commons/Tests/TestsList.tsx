@@ -1,7 +1,6 @@
 "use client";
 
-import TestCard from "./TestCard";
-
+import TestCard from "@/components/commons/Tests/TestCard";
 import styles from "./tests.module.scss";
 
 interface TestsListProps {

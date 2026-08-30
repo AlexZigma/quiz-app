@@ -1,16 +1,19 @@
 "use client";
 
+import Button from "@/components/commons/Button/Button";
+import Card from "@/components/commons/Card";
+import TextInput from "@/components/commons/Inputs/TextInput";
+import {
+  ChoiceAnswer,
+  NumberAnswer,
+} from "@/components/commons/Question/Answer";
+import SortableItem from "@/components/commons/Sortable/SortableItem";
 import { QuestionSchema } from "@/lib/zod";
 import { useTest } from "@/providers/TestProvider";
 import { move } from "@dnd-kit/helpers";
 import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
 import { SubmitEventHandler, useState } from "react";
 import z from "zod";
-import Button from "../Button/Button";
-import Card from "../Card/Card";
-import TextInput from "../Inputs/TextInput";
-import { SortableItem } from "../Sortable/SortableItem";
-import { ChoiceAnswer, NumberAnswer } from "./Answer";
 import styles from "./question.module.scss";
 
 export default function QuestionForm() {
