@@ -51,7 +51,6 @@ main {
 
 h1,
 .h1 {
-  /* Мин: 2rem (32px), Текущий: 4vw, Макс: 3rem (48px) */
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   color: #1a1a1a;
@@ -59,7 +58,6 @@ h1,
 
 h2,
 .h2 {
-  /* Мин: 1.5rem (24px), Текущий: 3vw, Макс: 2.25rem (36px) */
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 600;
   color: #2c3e50;
@@ -67,7 +65,6 @@ h2,
 
 p,
 .p {
-  /* Мин: 0.95rem (~15px), Текущий: 1vw + 0.5rem, Макс: 1.1rem (~18px) */
   font-size: clamp(0.95rem, 1vw + 0.5rem, 1.1rem);
   font-weight: 400;
 }
