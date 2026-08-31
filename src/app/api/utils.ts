@@ -1,6 +1,6 @@
 import { mapQuestionToRaw, mapTest } from "@/lib/utils";
 import { Question, RawTest, Test } from "@/models/test/types";
-import { RawUser } from "@/models/user";
+import { RawUser } from "@/models/user/user";
 
 type RequestConfig = {
   params?: Record<string, string>;

@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchCurrentUser, loginRequest, logoutRequest } from "@/app/api/utils";
-import { User } from "@/models/user";
+import { User } from "@/models/user/user";
 import {
   createContext,
   ReactNode,
