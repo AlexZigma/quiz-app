@@ -5,7 +5,7 @@ import ProtectedRoute from "@/app/ProtectedRoute";
 import Quiz from "@/components/pages/Quiz";
 import { Test } from "@/models/test/types";
 import { notFound } from "next/navigation";
-import { use, useLayoutEffect, useState } from "react";
+import { use, useLayoutEffect as useEffect, useRef, useState } from "react";
 
 export default function TestPage({
   params,
@@ -17,7 +17,13 @@ export default function TestPage({
   const [test, setTest] = useState<Test>();
   const [isLoading, setIsLoading] = useState(true);
 
-  useLayoutEffect(() => {
+  const keyRef = useRef<null | string>(null);
+
+  useEffect(() => {
+    const key = id;
+    if (keyRef.current === key) return;
+    keyRef.current = key;
+
     fetchTestById(id)
       .then((data) => setTest(data))
       .catch()

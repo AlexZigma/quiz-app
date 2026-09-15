@@ -4,7 +4,7 @@ import { fetchTestById } from "@/app/api/utils";
 import TestForm from "@/components/commons/Tests/TestForm";
 import { useTest } from "@/providers/TestProvider";
 import { notFound } from "next/navigation";
-import { use, useEffect as useLayoutEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 export default function TestEditPage({
   params,
@@ -17,7 +17,13 @@ export default function TestEditPage({
   const [isLoading, setIsLoaging] = useState(true);
   const [error, setError] = useState("");
 
-  useLayoutEffect(() => {
+  const keyRef = useRef<null | string>(null);
+
+  useEffect(() => {
+    const key = id;
+    if (keyRef.current === key) return;
+    keyRef.current = key;
+
     fetchTestById(id)
       .then((test) => loadTest(test))
       .catch(() => setError("network error"))

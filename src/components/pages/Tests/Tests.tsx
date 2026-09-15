@@ -13,7 +13,7 @@ import TestsList from "@/components/commons/Tests/TestsList";
 import { TestBase } from "@/models/test/types";
 import { useAuth } from "@/providers/AuthProvider";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Tests() {
   const { user } = useAuth();
@@ -28,7 +28,13 @@ export default function Tests() {
   const currentPage = Number(searchParams.get("page")) || 1;
   const sorting = (searchParams.get("sort_direction") as "asc") || "desc";
 
+  const keyRef = useRef<null | string>(null);
+
   useEffect(() => {
+    const key = `${currentPage.toString()}-${searchQuery}-${sorting}`;
+    if (keyRef.current === key) return;
+    keyRef.current = key;
+
     fetchTests(currentPage.toString(), searchQuery, sorting)
       .then((data) => {
         setTests(data.results);
