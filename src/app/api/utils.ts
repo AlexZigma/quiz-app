@@ -123,19 +123,19 @@ export const updateTestRequest = async (
   testId: string,
   payload: Partial<{ title: string; isPublished: boolean }>,
 ) => {
-  return request<TestBase>(`/api/tests/${testId}`, {
+  return request<TestBase>(`/api/tests/${testId}/`, {
     options: { method: "PATCH", body: JSON.stringify(payload) },
   });
 };
 
 export const deleteTestRequest = async (testId: string) => {
-  return request(`/api/tests/${testId}`, {
+  return request(`/api/tests/${testId}/`, {
     options: { method: "DELETE" },
   });
 };
 
 export const createQuestions = (testId: number, questions: Question[]) => {
-  return request(`/api/tests/${testId}/questions`, {
+  return request(`/api/tests/${testId}/questions/`, {
     options: {
       method: "POST",
       body: JSON.stringify(questions.map(mapQuestionToRaw)),
@@ -144,7 +144,7 @@ export const createQuestions = (testId: number, questions: Question[]) => {
 };
 
 export const updateQuestions = (testId: string, questions: Question[]) => {
-  return request(`/api/tests/${testId}/questions`, {
+  return request(`/api/tests/${testId}/questions/`, {
     options: {
       method: "PATCH",
       body: JSON.stringify(questions.map(mapQuestionToRaw)),
