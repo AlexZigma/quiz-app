@@ -21,6 +21,7 @@ export default function Tests() {
 
   const [tests, setTests] = useState<TestBase[]>();
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
@@ -40,7 +41,8 @@ export default function Tests() {
         setTests(data.results);
         setTotalPages(data.pagination.total_pages);
       })
-      .catch(() => setError("Network error"));
+      .catch(() => setError("Network error"))
+      .finally(() => setIsLoading(false));
   }, [currentPage, searchQuery, sorting]);
 
   return (
@@ -59,11 +61,20 @@ export default function Tests() {
         )}
       </div>
 
-      {error && error}
+      {error && <h2 className={styles.info}>{error}</h2>}
 
-      {tests && <TestsList tests={tests} />}
+      {isLoading && <h2 className={styles.info}>Loading...</h2>}
 
-      {tests && <Pagination totalPages={totalPages} />}
+      {!isLoading && tests && tests.length === 0 && (
+        <h2 className={styles.info}>No tests found</h2>
+      )}
+
+      {tests && tests.length > 0 && (
+        <>
+          <TestsList tests={tests} />
+          <Pagination totalPages={totalPages} />
+        </>
+      )}
     </main>
   );
 }
