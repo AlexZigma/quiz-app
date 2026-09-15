@@ -36,7 +36,7 @@ export default function TestPage({
 
   return (
     <ProtectedRoute>
-      <Quiz test={test} />;
+      <Quiz test={test} />
     </ProtectedRoute>
   );
 }

@@ -7,7 +7,7 @@ export default function EditorLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <ProtectedRoute isAdmin>
-      <TestProvider>{children}</TestProvider>;
+      <TestProvider>{children}</TestProvider>
     </ProtectedRoute>
   );
 }
