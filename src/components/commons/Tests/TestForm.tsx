@@ -18,6 +18,7 @@ import {
 import QuestionForm from "@/components/commons/Question/QuestionForm";
 import QuestionView from "@/components/commons/Question/QuestionView";
 import ErrorText from "@/components/commons/Text/Error";
+import { isDeepEqual } from "@/lib/utils";
 import { TestFormSchema } from "@/lib/zod";
 import { QuestionType } from "@/models/test/types";
 import { useModal } from "@/providers/ModalProvider";
@@ -39,6 +40,13 @@ export default function TestForm({ mode }: TestFormProps) {
   const { test, updateTest, editState, startNewDraft } = useTest();
   const router = useRouter();
 
+  const [initialTest] = useState(test);
+  const isTitleChanged = initialTest.title !== test.title;
+  const isQuestionsChanged = !isDeepEqual(
+    initialTest.questions,
+    test.questions,
+  );
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<{
     title?: string[];
@@ -53,7 +61,11 @@ export default function TestForm({ mode }: TestFormProps) {
       return;
     }
 
-    openModal(<ModalConfirm title="Save test?" onConfirm={saveTest} />);
+    if (isTitleChanged || isQuestionsChanged) {
+      openModal(<ModalConfirm title="Save test?" onConfirm={saveTest} />);
+    } else {
+      router.push("/tests");
+    }
   };
 
   const saveTest = async () => {
@@ -65,8 +77,8 @@ export default function TestForm({ mode }: TestFormProps) {
         const data = await createTestRequest({ title });
         await createQuestions(data.id, questions);
       } else {
-        await updateTestRequest(id, { title });
-        await updateQuestions(id, questions);
+        if (isTitleChanged) await updateTestRequest(id, { title });
+        if (isQuestionsChanged) await updateQuestions(id, questions);
       }
       router.push("/tests");
     } catch {
@@ -129,9 +141,7 @@ export default function TestForm({ mode }: TestFormProps) {
             placeholder="Test 1"
             value={test.title}
             onChange={(event) => {
-              updateTest({
-                title: event.target.value,
-              });
+              updateTest({ title: event.target.value });
             }}
           />
           <ErrorText text={error?.title?.[0]} />
