@@ -6,6 +6,7 @@ import Input from "@/components/commons/Inputs/TextInput";
 import ErrorText from "@/components/commons/Text/Error";
 import { SignInSchema } from "@/lib/zod";
 import { useAuth } from "@/providers/AuthProvider";
+import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { SubmitEventHandler, useState } from "react";
 import z from "zod";
@@ -36,8 +37,12 @@ export default function AuthForm() {
     try {
       await login(parsed.data.username, parsed.data.password);
       router.push("/tests");
-    } catch {
-      setFormError({ message: "Wrong login or password" });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setFormError({ message: error.message });
+      } else {
+        setFormError({ message: "Something went wrong" });
+      }
     }
   };
 
