@@ -1,6 +1,8 @@
 import { mapQuestionToRaw, mapTest } from "@/lib/utils";
+import { ExceptionType } from "@/models/error/types";
 import { Question, RawTest, Test } from "@/models/test/types";
 import { RawUser } from "@/models/user/user";
+import { ApiError } from "next/dist/server/api-utils";
 
 type RequestConfig = {
   params?: Record<string, string>;
@@ -25,12 +27,12 @@ export const request = async <T>(
     throw new Error("Network Error");
   }
 
-  if (res.status === 401) {
-    throw new Error("Authentication failed");
-  }
-
   if (!res.ok) {
-    throw new Error("An error occurred while fetching the data");
+    const exception: ExceptionType = await res.json();
+    throw new ApiError(
+      res.status,
+      exception.translation_key || "Unknown error",
+    );
   }
 
   if (res.status === 204) return null as T;
