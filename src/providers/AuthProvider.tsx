@@ -2,6 +2,7 @@
 
 import { fetchCurrentUser, loginRequest, logoutRequest } from "@/app/api/utils";
 import { User } from "@/models/user/user";
+import { usePathname } from "next/navigation";
 import {
   createContext,
   ReactNode,
@@ -19,13 +20,22 @@ type AuthContextType = {
   logout: () => Promise<void>;
 };
 
+const skipAuthPaths = ["/login/"];
+
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const pathname = usePathname();
+
   useEffect(() => {
+    if (skipAuthPaths.includes(pathname)) {
+      setIsLoading(false);
+      return;
+    }
+
     const getCurrentUser = async () => {
       try {
         const data = await fetchCurrentUser();
