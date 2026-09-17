@@ -19,7 +19,7 @@ Quiz app for create and pass tests
 ### 1. Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. Setup environment variables
@@ -33,7 +33,14 @@ NEXT_PUBLIC_SERVER_URL=https://interns-test-fe.snp.agency
 ### 3. Run development server:
 
 ```bash
-npm run dev
+pnpm run dev
+```
+
+### 4. Or build and run:
+
+```bash
+pnpm build
+pnpm start
 ```
 
 ## Project Structure
