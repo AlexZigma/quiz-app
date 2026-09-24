@@ -18,7 +18,7 @@ import {
 import QuestionForm from "@/components/commons/Question/QuestionForm";
 import QuestionView from "@/components/commons/Question/QuestionView";
 import ErrorText from "@/components/commons/Text/Error";
-import { isDeepEqual } from "@/lib/utils";
+import { isQuestionChanged } from "@/lib/utils";
 import { TestFormSchema } from "@/lib/zod";
 import { QuestionType } from "@/models/test/types";
 import { useModal } from "@/providers/ModalProvider";
@@ -42,7 +42,7 @@ export default function TestForm({ mode }: TestFormProps) {
 
   const [initialTest] = useState(test);
   const isTitleChanged = initialTest.title !== test.title;
-  const isQuestionsChanged = !isDeepEqual(
+  const isQuestionsChanged = isQuestionChanged(
     initialTest.questions,
     test.questions,
   );

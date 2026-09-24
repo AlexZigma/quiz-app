@@ -22,21 +22,36 @@ export function isAnswerRight(
   );
 }
 
-export function isDeepEqual(a: any, b: any) {
-  if (a === b) return true;
-  if (a == null || b == null || typeof a !== "object" || typeof b !== "object")
-    return false;
+function isAnswerEqual(a: Answer, b: Answer) {
+  return (
+    a.id === b.id &&
+    a.text === b.text &&
+    a.isRight === b.isRight &&
+    a.position === b.position
+  );
+}
 
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-  if (keysA.length !== keysB.length) return false;
+function isQuestionsEqual(a: Question, b: Question) {
+  const isAnswersEqual = a.answers.every((answerA) => {
+    const answerB = b.answers.find((answer) => answer.id === answerA.id);
+    return answerB ? isAnswerEqual(answerA, answerB) : false;
+  });
 
-  for (const key of keysA) {
-    if (!keysB.includes(key)) return false;
-    if (!isDeepEqual(a[key], b[key])) return false;
-  }
+  return (
+    a.id === b.id &&
+    a.title === b.title &&
+    a.questionType === b.questionType &&
+    isAnswersEqual
+  );
+}
 
-  return true;
+export function isQuestionChanged(a: Question[], b: Question[]) {
+  if (a.length !== b.length) return true;
+
+  return a.some((questionA) => {
+    const questionB = b.find((question) => question.id === questionA.id);
+    return questionB ? !isQuestionsEqual(questionA, questionB) : true;
+  });
 }
 
 export const mapAnswer = (raw: RawAnswer): Answer => {
