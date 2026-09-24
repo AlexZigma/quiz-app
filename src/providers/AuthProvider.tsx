@@ -27,13 +27,16 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const pathname = usePathname();
 
+  const isSkipAuthPath = useMemo(
+    () => skipAuthPaths.includes(pathname),
+    [pathname],
+  );
+  const [isLoading, setIsLoading] = useState(isSkipAuthPath);
+
   useEffect(() => {
-    if (skipAuthPaths.includes(pathname)) {
-      setIsLoading(false);
+    if (isSkipAuthPath) {
       return;
     }
 
@@ -53,7 +56,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     getCurrentUser();
-  }, []);
+  }, [isSkipAuthPath]);
 
   const login = useCallback(async (username: string, password: string) => {
     setIsLoading(true);
