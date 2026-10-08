@@ -32,7 +32,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     () => skipAuthPaths.includes(pathname),
     [pathname],
   );
-  const [isLoading, setIsLoading] = useState(isSkipAuthPath);
+  const [isLoading, setIsLoading] = useState(!isSkipAuthPath);
 
   useEffect(() => {
     if (isSkipAuthPath) {
