@@ -2,7 +2,6 @@
 
 import { fetchCurrentUser, loginRequest, logoutRequest } from "@/app/api/utils";
 import { User } from "@/models/user/user";
-import { ApiError } from "next/dist/server/api-utils";
 import { usePathname } from "next/navigation";
 import {
   createContext,
@@ -44,12 +43,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const data = await fetchCurrentUser();
         setUser(data);
-      } catch (error) {
-        if (error instanceof ApiError && error.statusCode === 401) {
-          setUser(null);
-        } else {
-          setUser(null);
-        }
+      } catch {
+        setUser(null);
       } finally {
         setIsLoading(false);
       }
